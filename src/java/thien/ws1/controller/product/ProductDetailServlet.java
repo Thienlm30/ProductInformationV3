@@ -3,25 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thien.ws1.controller.account;
+package thien.ws1.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import thien.ws1.controller.Navigation;
-import thien.ws1.dao.AccountDAO;
-import thien.ws1.dto.Account;
+import thien.ws1.dao.ProductDAO;
+import thien.ws1.dto.Product;
 
 /**
  *
  * @author Thienlm30
  */
-public class ListAccountServlet extends HttpServlet {
+public class ProductDetailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +35,30 @@ public class ListAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            AccountDAO d = new AccountDAO();
-            List<Account> listAccount = d.listAll();
+            String productId = request.getParameter("productId");
+            String productName = request.getParameter("productName");
+            String productImage = request.getParameter("productImage");
+            String brief = request.getParameter("brief");
+            String unit = request.getParameter("unit");
+            String price = request.getParameter("price");
+            String discount = request.getParameter("discount");
+            ProductDAO d = new ProductDAO();
+            String url = "";
 
-            request.setAttribute("listAccount", listAccount);
-
-            HttpSession session = request.getSession();
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
+            Product checkId = d.getObjectById(productId);
+            if (checkId != null) {
+                request.setAttribute("productId", productId);
+                request.setAttribute("productName", productName);
+                request.setAttribute("productImage", productImage);
+                request.setAttribute("brief", brief);
+                request.setAttribute("unit", unit);
+                request.setAttribute("price", price);
+                request.setAttribute("discount", discount);
+                url = Navigation.URL_VIEW_PRODUCT_DETAIL;
             } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
+                url = Navigation.URL_WELCOME;
             }
-
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

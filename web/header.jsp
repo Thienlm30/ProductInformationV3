@@ -25,10 +25,10 @@
                 </div>
                 <div class="text-gray-500 order-3 w-full md:w-auto md:order-3">
                     <ul class="flex font-semibold justify-between">
-                        <li class="md:px-4 md:py-2 text-indigo-500"><a href="MainController?action=<%= Action.WELCOME%>">Home</a></li>
-                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.VIEW_ACCOUNT%>">Account</a></li>
-                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.VIEW_CATEGORY%>">Categories</a></li>
-                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.VIEW_PRODUCT%>">Product</a></li>
+                        <li class="md:px-4 md:py-2 text-indigo-500"><a href="MainController?action=<%= Action.WELCOME %>">Home</a></li>
+                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.VIEW_ACCOUNT %>">Account</a></li>
+                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.VIEW_CATEGORY %>">Categories</a></li>
+                        <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="MainController?action=<%= Action.ADD_PRODUCT %>">Product</a></li>
                     </ul>
                 </div>
                 <div class="order-2 md:order-3">

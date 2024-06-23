@@ -23,6 +23,7 @@ import thien.ws1.utils.ConnectDB;
  * @author Thienlm30
  */
 public class ProductDAO implements Accessible<Product> {
+
     private Connection connection = null;
 
     public ProductDAO() {
@@ -37,21 +38,96 @@ public class ProductDAO implements Accessible<Product> {
 
     @Override
     public int insertRec(Product obj) {
-        return 0;
+        int result = 0;
+        try {
+            if (connection != null) {
+                String sql = "update [dbo].[products] set [productName] = ?,[productImage] = ?,[brief] = ?,[postedDate] = ?,[typeId] = ?,[account] = ?,[unit] = ?,[price] = ?,[discount] = ? where [productId] = ?";
+                PreparedStatement pst = connection.prepareStatement(sql);
+                pst.setString(1, obj.getProductName());
+                pst.setString(2, obj.getProductImage());
+                pst.setString(3, obj.getBrief());
+                pst.setDate(4, (Date) obj.getPostedDate());
+                pst.setInt(5, obj.getType().getTypeId());
+                pst.setString(6, obj.getAccount().getAccount());
+                pst.setString(7, obj.getUnit());
+                pst.setInt(8, obj.getPrice());
+                pst.setInt(9, obj.getDiscount());
+                pst.setString(10, obj.getProductId());
+                result = pst.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
     public int updateRec(Product obj) {
-        return 0;
+        int result = 0;
+        try {
+            if (connection != null) {
+                String sql = "update [dbo].[products] set [productName] = ?,[productImage] = ?,[brief] = ?,[postedDate] = ?,[typeId] = ?,[account] = ?,[unit] = ?,[price] = ?,[discount] = ? where [productId] = ?";
+                PreparedStatement pst = connection.prepareStatement(sql);
+                pst.setString(1, obj.getProductName());
+                pst.setString(2, obj.getProductImage());
+                pst.setString(3, obj.getBrief());
+                pst.setDate(4, (Date) obj.getPostedDate());
+                pst.setInt(5, obj.getType().getTypeId());
+                pst.setString(6, obj.getAccount().getAccount());
+                pst.setString(7, obj.getUnit());
+                pst.setInt(8, obj.getPrice());
+                pst.setInt(9, obj.getDiscount());
+                pst.setString(10, obj.getProductId());
+                result = pst.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
     public int deleteRec(Product obj) {
-        return 0;
+        int result = 0;
+        try {
+            String sql = "delete from [dbo].[products] where [productId] = ?";
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, obj.getProductId());
+            result = pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
-    public Product getObjectById(String id) {
+    public Product getObjectById(String id
+    ) {
         Product p = null;
         try {
             if (connection != null) {

@@ -3,25 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thien.ws1.controller.account;
+package thien.ws1.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import thien.ws1.controller.Navigation;
-import thien.ws1.dao.AccountDAO;
-import thien.ws1.dto.Account;
+import thien.ws1.dao.CategoryDAO;
 
 /**
  *
  * @author Thienlm30
  */
-public class ListAccountServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,14 +35,11 @@ public class ListAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            AccountDAO d = new AccountDAO();
-            List<Account> listAccount = d.listAll();
-
-            request.setAttribute("listAccount", listAccount);
-
+            CategoryDAO d = new CategoryDAO();
+            request.setAttribute("categoryList", d.listAll());
             HttpSession session = request.getSession();
             if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
+                request.getRequestDispatcher(Navigation.URL_VIEW_ADD_PRODUCT).forward(request, response);
             } else {
                 request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
             }

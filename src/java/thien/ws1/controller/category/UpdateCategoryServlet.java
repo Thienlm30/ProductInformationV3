@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thien.ws1.controller.account;
+package thien.ws1.controller.category;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import thien.ws1.controller.Action;
 import thien.ws1.controller.Navigation;
-import thien.ws1.dao.AccountDAO;
-import thien.ws1.dto.Account;
+import thien.ws1.dao.CategoryDAO;
+import thien.ws1.dto.Category;
 
 /**
  *
  * @author Thienlm30
  */
-public class ListAccountServlet extends HttpServlet {
+public class UpdateCategoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +36,22 @@ public class ListAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            AccountDAO d = new AccountDAO();
-            List<Account> listAccount = d.listAll();
+            String id = request.getParameter("typeId");
+            String categoryName = request.getParameter("categoryName");
+            String memo = request.getParameter("memo");
 
-            request.setAttribute("listAccount", listAccount);
+            Category c = new Category(Integer.parseInt(id), categoryName, memo);
+            String url = "";
 
-            HttpSession session = request.getSession();
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
+            CategoryDAO d = new CategoryDAO();
+            if (d.updateRec(c) != 0) {
+                url = "MainController?action=" + Action.VIEW_CATEGORY;
             } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
+                String msg = "Update fail";
+                request.setAttribute("msg", msg);
+                url = Navigation.URL_VIEW_UPDATE_CATEGORY;
             }
-
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

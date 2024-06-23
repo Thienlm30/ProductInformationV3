@@ -42,7 +42,7 @@ public class MainController extends HttpServlet {
             switch (action) {
                 case Action.WELCOME:
                     url = Navigation.URL_WELCOME;
-                    break;                    
+                    break;
                 case Action.LOGIN:
                     url = Navigation.URL_LOGIN_FORM;
                     break;
@@ -84,13 +84,34 @@ public class MainController extends HttpServlet {
                     url = Navigation.URL_SUBMIT_ADD_CATEGORY_SERVLET;
                     break;
                 case Action.UPDATE_CATEGORY:
-                    url = "";
+                    url = Navigation.URL_VIEW_UPDATE_CATEGORY;
+                    break;
+                case Action.SUBMIT_UPDATE_CATEGORY:
+                    url = Navigation.URL_UPDATE_CATEGORY_SERVLET;
                     break;
                 case Action.DELETE_CATEGORY:
-                    url = "";
+                    url = Navigation.URL_DELETE_CATEGORY;
                     break;
                 
-                    
+                // product
+                case Action.SHOW_DETAIL:
+                    url = Navigation.URL_PRODUCT_DETAIL_SERVLET;
+                    break;
+                case Action.ADD_PRODUCT:
+                    url = Navigation.URL_ADD_PRODUCT;
+                    break;
+                case Action.SUBMIT_ADD_PRODUCT:
+                    url = Navigation.URL_SUBMIT_ADD_PRODUCT_SERVLET;
+                    break;
+                case Action.UPDATE_PRODUCT:
+                    url = Navigation.URL_VIEW_UPDATE_PRODUCT;
+                    break;
+                case Action.SUBMIT_UPDATE_PRODUCT:
+                    url = Navigation.URL_UPDATE_PRODUCT_SERVLET;
+                    break;
+                case Action.DELETE_PRODUCT:
+                    url = Navigation.URL_DELETE_PRODUCT_SERVLET;
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

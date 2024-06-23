@@ -24,13 +24,19 @@ public interface Action {
     // category
     public final String VIEW_CATEGORY = "category";
     public final String UPDATE_CATEGORY = "update-category";
+    public final String SUBMIT_UPDATE_CATEGORY = "submit-update-category";
     public final String DELETE_CATEGORY = "delete-category";
     public final String ADD_CATEGORY = "add-category";
     public final String SUBMIT_ADD_CATEGORY = "submit-add-category";
     
-    // product
-    public final String VIEW_PRODUCT = "product";
     
+    // product
+    public final String SHOW_DETAIL = "show-detail";
+    public final String UPDATE_PRODUCT = "update-product";
+    public final String SUBMIT_UPDATE_PRODUCT = "submit-update-product";
+    public final String DELETE_PRODUCT = "delete-product";
+    public final String ADD_PRODUCT = "add-product";
+    public final String SUBMIT_ADD_PRODUCT = "submit-add-product";
     
 
 }   

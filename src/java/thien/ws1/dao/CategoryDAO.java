@@ -20,6 +20,7 @@ import thien.ws1.utils.ConnectDB;
  * @author Thienlm30
  */
 public class CategoryDAO implements Accessible<Category> {
+
     private Connection connection = null;
 
     public CategoryDAO() {
@@ -34,17 +35,77 @@ public class CategoryDAO implements Accessible<Category> {
 
     @Override
     public int insertRec(Category obj) {
-        return 0;
+        int result = 0;
+        try {
+            if (connection != null) {
+                String sql = "insert into [dbo].[categories]([categoryName],[memo]) values(?,?)";
+                PreparedStatement pst = connection.prepareStatement(sql);
+                pst.setString(1, obj.getCategoryName());
+                pst.setString(2, obj.getMemo());
+                result = pst.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
     public int updateRec(Category obj) {
-        return 0;
+        int result = 0;
+        try {
+            if (connection != null) {
+                String sql = "update [dbo].[categories] set [categoryName] = ?, [memo] = ? where [typeId] = ?";
+                PreparedStatement pst = connection.prepareStatement(sql);
+                pst.setString(1, obj.getCategoryName());
+                pst.setString(2, obj.getMemo());
+                pst.setInt(3, obj.getTypeId());
+                result = pst.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
     public int deleteRec(Category obj) {
-        return 0;
+        int result = 0;
+        try {
+                String sql = "delete from [dbo].[categories] where [typeId] = ?";
+                PreparedStatement pst = connection.prepareStatement(sql);
+                pst.setInt(1, obj.getTypeId());
+                result = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override

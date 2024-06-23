@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import thien.ws1.controller.Navigation;
 import thien.ws1.dao.CategoryDAO;
 import thien.ws1.dto.Category;
@@ -38,12 +39,15 @@ public class ListCategoryServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             CategoryDAO d = new CategoryDAO();
             List<Category> list = d.listAll();
-            list.forEach((c) -> {
-                System.out.println(c);
-            });
+            HttpSession session = request.getSession();
             request.setAttribute("categoryList", list);
-            request.getRequestDispatcher(Navigation.URL_VIEW_CATEGORY).forward(request, response);
-            
+            if (session.getAttribute("loginedAcc") != null) {
+                request.getRequestDispatcher(Navigation.URL_VIEW_CATEGORY).forward(request, response);
+            } else {
+                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
+
+            }
+
         }
     }
 

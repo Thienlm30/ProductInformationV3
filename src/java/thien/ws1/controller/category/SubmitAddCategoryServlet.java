@@ -11,7 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import thien.ws1.controller.Action;
+import thien.ws1.controller.Navigation;
 import thien.ws1.dao.CategoryDAO;
+import thien.ws1.dto.Category;
 
 /**
  *
@@ -33,7 +36,19 @@ public class SubmitAddCategoryServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String categoryName = request.getParameter("categoryName");
+            String memo = request.getParameter("memo");
+            String url = "";
             CategoryDAO d = new CategoryDAO();
+            Category c = new Category(0, categoryName, memo);
+            if (d.insertRec(c) != 0) {
+                url = "MainController?action=" + Action.VIEW_CATEGORY;
+            } else {
+                String msg = "Add fail";
+                request.setAttribute("msg", msg);
+                url = Navigation.URL_VIEW_ADD_CATEGORY;
+            }
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

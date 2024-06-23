@@ -3,25 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thien.ws1.controller.account;
+package thien.ws1.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import thien.ws1.controller.Action;
 import thien.ws1.controller.Navigation;
 import thien.ws1.dao.AccountDAO;
+import thien.ws1.dao.CategoryDAO;
+import thien.ws1.dao.ProductDAO;
 import thien.ws1.dto.Account;
+import thien.ws1.dto.Category;
+import thien.ws1.dto.Product;
 
 /**
  *
  * @author Thienlm30
  */
-public class ListAccountServlet extends HttpServlet {
+public class SubmitAddProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +41,38 @@ public class ListAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            AccountDAO d = new AccountDAO();
-            List<Account> listAccount = d.listAll();
+            request.setCharacterEncoding("UTF-8");
+            String productId = request.getParameter("productId");
+            String productName = request.getParameter("productName");
+            String productImage = request.getParameter("productImage");
+            String brief = request.getParameter("brief");
+            Date postedDate = Date.valueOf(request.getParameter("postedDate"));
+            String unit = request.getParameter("unit");
+            String typeId = request.getParameter("typeId");
+            CategoryDAO cd = new CategoryDAO();
+            Category c = cd.getObjectById(String.valueOf(typeId));
+            String acc = request.getParameter("account");
+            AccountDAO ad = new AccountDAO();
+            Account account = ad.getObjectById(acc);
+            int price = Integer.parseInt(request.getParameter("price"));
+            int discount = Integer.parseInt(request.getParameter("discount"));
 
-            request.setAttribute("listAccount", listAccount);
+            String url = "MainController?action=" + Action.WELCOME;
+            String message = "";
+            ProductDAO d = new ProductDAO();
 
-            HttpSession session = request.getSession();
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
+            if (d.getObjectById(productId) != null) {
+                message = "Product Id already exists";
+                request.setAttribute("message", message);
+                url = "MainController?action=" + Action.ADD_PRODUCT;
             } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
+                d = new ProductDAO();
+                Product p = new Product(productId, productName, productImage, brief, postedDate, c, account, unit, price, discount);
+                if (d.insertRec(p) != 0) {
+                    url = Navigation.URL_VIEW_PRODUCT_DETAIL;
+                }
             }
-
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -11,7 +11,8 @@ package thien.ws1.controller;
  */
 public interface Navigation {
     public final String URL_ERROR = "";
-    public final String URL_WELCOME = "index.jsp";
+    public final String URL_WELCOME = "ListProductServlet";
+    public final String URL_HOME = "index.jsp";
     public final String URL_LOGIN_FORM = "login.jsp";
     public final String URL_LOGOUT = "LogoutServlet";
     // account
@@ -25,8 +26,14 @@ public interface Navigation {
     public final String URL_DELETE_ACCOUNT_SERVLET = "DeleteAccountServlet";
     
     // product
-    public final String URL_VIEW_PRODUCT = "viewProduct.jsp";
-    public final String URL_PRODUCT_SERVLET = "ListProductServlet";
+    public final String URL_PRODUCT_DETAIL_SERVLET = "ProductDetailServlet";
+    public final String URL_VIEW_PRODUCT_DETAIL = "showProductDetail.jsp";
+    public final String URL_VIEW_ADD_PRODUCT = "addProduct.jsp";
+    public final String URL_ADD_PRODUCT = "AddProductServlet";
+    public final String URL_SUBMIT_ADD_PRODUCT_SERVLET = "SubmitAddProductServlet";
+    public final String URL_VIEW_UPDATE_PRODUCT = "viewUpdateProduct.jsp";
+    public final String URL_UPDATE_PRODUCT_SERVLET = "UpdateProductServlet";
+    public final String URL_DELETE_PRODUCT_SERVLET = "DeleteProductServlet";
     
     // category
     public final String URL_VIEW_CATEGORY = "viewCategory.jsp";
@@ -34,6 +41,10 @@ public interface Navigation {
     public final String URL_ADD_CATEGORY_SERVLET = "AddCategoryServlet";
     public final String URL_VIEW_ADD_CATEGORY = "addCategory.jsp";
     public final String URL_SUBMIT_ADD_CATEGORY_SERVLET = "SubmitAddCategoryServlet";
+    public final String URL_UPDATE_CATEGORY_SERVLET = "UpdateCategoryServlet";
+    public final String URL_VIEW_UPDATE_CATEGORY = "viewUpdateCategory.jsp";
+    public final String URL_DELETE_CATEGORY = "DeleteCategoryServlet";
+    
     
     
     

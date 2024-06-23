@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@
                 </table>
                 <form action="MainController" method="post">
                     <div class="flex w-full justify-center mt-7">
-                        <button class="deactivate" type="submit" name="action" value="<%= Action.ADD_CATEGORY %>">Add new</button>
+                        <button class="deactivate" type="submit" name="action" value="<%= Action.ADD_CATEGORY %>">Add new Category</button>
                     </div>
                 </form>
             </div>
