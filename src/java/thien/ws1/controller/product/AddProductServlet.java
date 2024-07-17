@@ -37,12 +37,8 @@ public class AddProductServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             CategoryDAO d = new CategoryDAO();
             request.setAttribute("categoryList", d.listAll());
-            HttpSession session = request.getSession();
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ADD_PRODUCT).forward(request, response);
-            } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
-            }
+
+            request.getRequestDispatcher(Navigation.URL_VIEW_ADD_PRODUCT).forward(request, response);
 
         }
     }

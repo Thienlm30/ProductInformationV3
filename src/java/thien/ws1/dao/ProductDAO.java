@@ -41,18 +41,20 @@ public class ProductDAO implements Accessible<Product> {
         int result = 0;
         try {
             if (connection != null) {
-                String sql = "update [dbo].[products] set [productName] = ?,[productImage] = ?,[brief] = ?,[postedDate] = ?,[typeId] = ?,[account] = ?,[unit] = ?,[price] = ?,[discount] = ? where [productId] = ?";
+                String sql = "insert into [dbo].[products]([productId],[productName],[productImage],[brief],[postedDate],[typeId],[account],[unit],[price],[discount]) "
+                        + "values(?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement pst = connection.prepareStatement(sql);
-                pst.setString(1, obj.getProductName());
-                pst.setString(2, obj.getProductImage());
-                pst.setString(3, obj.getBrief());
-                pst.setDate(4, (Date) obj.getPostedDate());
-                pst.setInt(5, obj.getType().getTypeId());
-                pst.setString(6, obj.getAccount().getAccount());
-                pst.setString(7, obj.getUnit());
-                pst.setInt(8, obj.getPrice());
-                pst.setInt(9, obj.getDiscount());
-                pst.setString(10, obj.getProductId());
+                pst.setString(1, obj.getProductId());
+                pst.setString(2, obj.getProductName());
+                pst.setString(3, obj.getProductImage());
+                pst.setString(4, obj.getBrief());
+                pst.setDate(5, (Date) obj.getPostedDate());
+                pst.setInt(6, obj.getType().getTypeId());
+                pst.setString(7, obj.getAccount().getAccount());
+                pst.setString(8, obj.getUnit());
+                pst.setInt(9, obj.getPrice());
+                pst.setInt(10, obj.getDiscount());
+                
                 result = pst.executeUpdate();
             }
         } catch (Exception e) {

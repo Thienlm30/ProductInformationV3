@@ -58,7 +58,7 @@ public class SubmitAddProductServlet extends HttpServlet {
             int discount = Integer.parseInt(request.getParameter("discount"));
 
             String url = "MainController?action=" + Action.WELCOME;
-            String message = "";
+            String message;
             ProductDAO d = new ProductDAO();
 
             if (d.getObjectById(productId) != null) {

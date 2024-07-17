@@ -38,7 +38,7 @@ public class ListProductServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ProductDAO d = new ProductDAO();
             List<Product> list = d.listAll();
-            request.setAttribute("productList", list);
+            request.setAttribute("productList", list);  
             request.getRequestDispatcher(Navigation.URL_HOME).forward(request, response);
         }
     }

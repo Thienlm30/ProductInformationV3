@@ -42,12 +42,7 @@ public class ListAccountServlet extends HttpServlet {
 
             request.setAttribute("listAccount", listAccount);
 
-            HttpSession session = request.getSession();
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
-            } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
-            }
+            request.getRequestDispatcher(Navigation.URL_VIEW_ACCOUNT).forward(request, response);
 
         }
     }

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="/WEB-INF/tlds/mytags.tld" prefix="t" %>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -30,28 +31,7 @@
                         <input type="hidden" name="price" value="${product.price}" />
                         <input type="hidden" name="discount" value="${product.discount}" />
                         <button type="submit" name="action" value="<%= Action.SHOW_DETAIL%>">
-                            <div class="group w-80 rounded-lg overflow-hidden shadow-lg bg-white m-4 relative hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-                                <div class="w-full h-80 overflow-hidden">
-                                    <img class="object-cover w-full h-full" src=".${product.productImage}" alt="${product.productName}">
-                                </div>
-                                <div class="px-6 py-4">
-                                    <div class="font-bold text-sm mb-2">${product.productName}</div>
-                                    <div class="flex justify-between items-center">
-                                        <div>
-                                            <c:choose>
-                                                <c:when test="${product.discount != 0}">
-                                                    <span class="text-gray-600 text-sm line-through mr-2">${product.price} VND</span>
-                                                    <span class="text-green-600 text-sm font-semibold">${product.price - (product.price * product.discount / 100)} VND</span>
-                                                    <span class="text-red-600 text-sm ml-2">${product.discount}% OFF</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="text-green-600 text-sm font-semibold">${product.price} VND</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <t:ShowProduct name="${product.productName}" price="${product.price}" image="${product.productImage}" discount="${product.discount}"></t:ShowProduct>
                         </button>
                     </form>
                 </c:forEach>

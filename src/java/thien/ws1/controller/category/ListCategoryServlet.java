@@ -39,14 +39,10 @@ public class ListCategoryServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             CategoryDAO d = new CategoryDAO();
             List<Category> list = d.listAll();
-            HttpSession session = request.getSession();
+            
             request.setAttribute("categoryList", list);
-            if (session.getAttribute("loginedAcc") != null) {
-                request.getRequestDispatcher(Navigation.URL_VIEW_CATEGORY).forward(request, response);
-            } else {
-                request.getRequestDispatcher(Navigation.URL_LOGIN_FORM).forward(request, response);
-
-            }
+            
+            request.getRequestDispatcher(Navigation.URL_VIEW_CATEGORY).forward(request, response);
 
         }
     }
